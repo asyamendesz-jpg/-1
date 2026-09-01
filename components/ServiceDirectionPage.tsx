@@ -5,6 +5,7 @@ import { PageHero } from "@/components/PageHero";
 import { PortfolioGallery } from "@/components/PortfolioGallery";
 import { Section } from "@/components/Reveal";
 import { buildMetadata, type ServiceCategory } from "@/lib/content";
+import { Suspense } from "react";
 
 export function ServiceDirectionPage({
   category,
@@ -53,7 +54,9 @@ export function ServiceDirectionPage({
       <Section tone="cream">
         <h2 className="mb-8 font-serif text-4xl text-ink">{category.id === "extensions" ? "Калькулятор наращивания" : category.id === "lashes" ? "Какой эффект ресниц — ваш?" : category.id === "brows" ? "Подбор формы бровей" : "Что подойдёт именно моим волосам?"}</h2>
         <div className="rounded-[2rem] bg-ivory p-5 sm:p-8">
-          <BeautyQuiz initialMode={quizMode} />
+          <Suspense fallback={<p className="text-muted">Открываем подбор…</p>}>
+            <BeautyQuiz initialMode={quizMode} />
+          </Suspense>
         </div>
       </Section>
       <PortfolioGallery heading="Работы этого направления" filter={category.id} />

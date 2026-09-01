@@ -22,6 +22,7 @@ import {
   type QuizResult as QuizResultType,
 } from "@/lib/quiz";
 import type { DirectionId, QuizMode } from "@/lib/content";
+import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
 const modes: { id: DirectionId; label: string; text: string; image: string }[] = [
@@ -40,8 +41,15 @@ const titles: Record<DirectionId, string> = {
   complex: "Персональный Beauty-подбор",
 };
 
-export function BeautyQuiz({ initialMode = "choice" }: { initialMode?: QuizMode }) {
-  const [mode, setMode] = useState<QuizMode>(initialMode);
+const quizModes: QuizMode[] = ["choice", "hair", "extensions", "lashes", "brows", "complex"];
+
+export function BeautyQuiz({ initialMode }: { initialMode?: QuizMode }) {
+  const searchParams = useSearchParams();
+  const modeFromUrl = searchParams.get("mode");
+  const startMode =
+    initialMode ??
+    (quizModes.includes(modeFromUrl as QuizMode) ? (modeFromUrl as QuizMode) : "choice");
+  const [mode, setMode] = useState<QuizMode>(startMode);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [lead, setLead] = useState<ContactLead>({ name: "", contact: "", consent: false });

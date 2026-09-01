@@ -1,11 +1,16 @@
 import type { NextConfig } from "next";
 
+const repoName = "-1";
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   agentRules: false,
+  output: "export",
+  trailingSlash: true,
   images: {
-    formats: ["image/avif", "image/webp"],
+    unoptimized: true,
   },
+  basePath: process.env.GITHUB_PAGES === "true" ? `/${repoName}` : "",
 };
 
 export default nextConfig;

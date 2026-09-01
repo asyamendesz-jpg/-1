@@ -4,6 +4,7 @@ import { Button } from "@/components/Button";
 import { OptionGrid, QuizStep } from "@/components/QuizStep";
 import { categories, masters, site } from "@/lib/content";
 import { hasUsableLink } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
 const times = ["10:00", "11:30", "13:00", "15:00", "17:00", "19:00"];
@@ -23,6 +24,7 @@ export function BookingWizard({
   initialService?: string;
   initialMaster?: string;
 }) {
+  const searchParams = useSearchParams();
   const services = useMemo(
     () => categories.flatMap((category) => category.services.map((service) => ({ ...service, category: category.title }))),
     [],
@@ -30,8 +32,8 @@ export function BookingWizard({
   const dates = useMemo(() => upcomingDates(), []);
 
   const [step, setStep] = useState(0);
-  const [serviceId, setServiceId] = useState(initialService ?? "");
-  const [masterId, setMasterId] = useState(initialMaster ?? "");
+  const [serviceId, setServiceId] = useState(initialService ?? searchParams.get("service") ?? "");
+  const [masterId, setMasterId] = useState(initialMaster ?? searchParams.get("master") ?? "");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [name, setName] = useState("");

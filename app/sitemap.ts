@@ -1,5 +1,7 @@
-import { categories } from "@/lib/content";
+import { categories, site } from "@/lib/content";
 import type { MetadataRoute } from "next";
+
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
@@ -18,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return paths.map((path) => ({
-    url: path || "/",
+    url: `${site.url}${path || "/"}`,
     lastModified: new Date(),
   }));
 }
