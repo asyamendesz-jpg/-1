@@ -14,7 +14,6 @@ export function MasterCard({ id }: { id: string }) {
           src={master.photo}
           alt={master.photoAlt}
           className="h-full w-full"
-          badge="[ФОТО МАСТЕРА]"
         />
       </div>
       <div className="p-6">

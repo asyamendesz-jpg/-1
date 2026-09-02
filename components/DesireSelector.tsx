@@ -9,8 +9,8 @@ export function DesireSelector() {
     id: "complex",
     desire: "Хочу комплексный образ",
     desireLead: "Персональный Beauty-подбор для волос, ресниц и бровей — что изменить, а что оставить.",
-    image: "/images/cat-complex.jpg",
-    imageAlt: "[ФОТО РАБОТЫ] Комплексный образ — заменить на реальную работу салона",
+    image: "/images/salon/hair-waves-blonde.jpg",
+    imageAlt: "Комплексный образ — работа салона",
     quizHref: "/podbor?mode=complex",
   };
 

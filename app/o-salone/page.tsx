@@ -17,8 +17,8 @@ export default function AboutPage() {
         eyebrow="О салоне"
         title={site.tagline}
         text={site.philosophy}
-        image="/images/salon-atmosphere.jpg"
-        imageAlt="[ФОТО АТМОСФЕРЫ САЛОНА]"
+        image="/images/salon/makeup-glitter-eyes.jpg"
+        imageAlt="Работа салона: взгляд и макияж"
       />
       <Section tone="ivory">
         <div className="grid gap-10 lg:grid-cols-2">
@@ -41,8 +41,8 @@ export default function AboutPage() {
           </div>
           <div className="group overflow-hidden rounded-[1.8rem]">
             <WorkPhoto
-              src="/images/cat-complex.jpg"
-              alt="[ФОТО РАБОТЫ] Натуральный или более яркий образ — заменить"
+              src="/images/salon/makeup-glitter-eyes.jpg"
+              alt="Работа салона: натуральный или более яркий образ"
               className="aspect-[4/5] w-full"
             />
           </div>
