@@ -693,7 +693,19 @@ export const processSteps = [
   },
 ];
 
-export const portfolio = [
+export interface PortfolioItem {
+  id: string;
+  category: DirectionId;
+  title: string;
+  caption: string;
+  before: string;
+  after: string;
+  pair?: boolean;
+  compare?: boolean;
+  isPlaceholder: boolean;
+}
+
+export const portfolio: PortfolioItem[] = [
   {
     id: "p1",
     category: "hair" as DirectionId,
