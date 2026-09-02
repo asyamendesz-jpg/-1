@@ -726,9 +726,9 @@ export const portfolio = [
     id: "p4",
     category: "brows" as DirectionId,
     title: "Аккуратная форма",
-    caption: "Работа салона: оформление бровей.",
-    before: "/images/ba-brow-before.jpg",
-    after: "/images/salon/portrait-brows.jpg",
+    caption: "До и после: оформление бровей.",
+    before: "/images/salon/brows-before.jpg",
+    after: "/images/salon/brows-after.jpg",
     isPlaceholder: false,
   },
   {
@@ -793,8 +793,8 @@ export const masters = [
     photoAlt: "[ФОТО МАСТЕРА] Заменить на профессиональный портрет",
     directions: ["brows"] as DirectionId[],
     works: [
-      { src: "/images/salon/portrait-brows.jpg", alt: "Работа мастера: брови" },
-      { src: "/images/salon/brows-before-after.jpg", alt: "Работа мастера: до и после бровей" },
+      { src: "/images/salon/brows-after.jpg", alt: "Работа мастера: брови" },
+      { src: "/images/salon/brows-before.jpg", alt: "Работа мастера: брови до оформления" },
     ],
     isPlaceholder: true,
   },
