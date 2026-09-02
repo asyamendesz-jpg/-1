@@ -1,5 +1,6 @@
 "use client";
 
+import { WorkPhoto } from "@/components/WorkPhoto";
 import { mediaSrc } from "@/lib/asset";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -67,6 +68,28 @@ export function BeforeAfterSlider({
         onChange={(event) => setValue(Number(event.target.value))}
         className="absolute inset-0 z-20 cursor-ew-resize opacity-0"
       />
+    </div>
+  );
+}
+
+export function BeforeAfterPhoto({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    <div className={cn("relative aspect-[16/10] overflow-hidden bg-powder", className)}>
+      <WorkPhoto src={src} alt={alt} className="h-full w-full" sizes="(max-width: 768px) 100vw, 50vw" />
+      <div className="pointer-events-none absolute left-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
+        До
+      </div>
+      <div className="pointer-events-none absolute right-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
+        После
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
+import { BeforeAfterPhoto, BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { Eyebrow, Reveal, Section } from "@/components/Reveal";
 import { portfolio } from "@/lib/content";
 import type { DirectionId } from "@/lib/content";
@@ -61,12 +61,16 @@ export function PortfolioGallery({
         {items.map((item) => (
           <Reveal key={item.id}>
             <figure className="overflow-hidden rounded-[1.6rem] bg-ivory shadow-[var(--shadow-card)]">
-              <BeforeAfterSlider
-                before={item.before}
-                after={item.after}
-                beforeAlt={`${item.caption} — до`}
-                afterAlt={`${item.caption} — после`}
-              />
+              {item.compare === false ? (
+                <BeforeAfterPhoto src={item.after} alt={item.caption} />
+              ) : (
+                <BeforeAfterSlider
+                  before={item.before}
+                  after={item.after}
+                  beforeAlt={`${item.caption} — до`}
+                  afterAlt={`${item.caption} — после`}
+                />
+              )}
               <figcaption className="p-5">
                 <p className="font-serif text-2xl text-ink">{item.title}</p>
                 <p className="mt-1 text-sm text-muted">{item.caption}</p>
