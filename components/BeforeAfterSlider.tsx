@@ -32,19 +32,19 @@ export function BeforeAfterSlider({
   return (
     <div
       ref={ref}
-      className={cn("relative aspect-[4/3] overflow-hidden bg-powder select-none", className)}
+      className={cn("relative aspect-[4/3] overflow-hidden bg-powder select-none touch-none", className)}
       onPointerDown={(event) => {
         (event.target as HTMLElement).setPointerCapture?.(event.pointerId);
         onPointer(event.clientX);
       }}
       onPointerMove={(event) => {
-        if (event.buttons !== 1) return;
+        if (event.pointerType === "mouse" && event.buttons !== 1) return;
         onPointer(event.clientX);
       }}
     >
-      <Image src={mediaSrc(after)} alt={afterAlt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-      <div className="absolute inset-0 overflow-hidden" style={{ width: `${value}%` }}>
-        <Image src={mediaSrc(before)} alt={beforeAlt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+      <Image src={mediaSrc(after)} alt={afterAlt} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
+      <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - value}% 0 0)` }}>
+        <Image src={mediaSrc(before)} alt={beforeAlt} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
       </div>
       <div className="pointer-events-none absolute inset-y-0 z-10 w-px bg-ivory" style={{ left: `${value}%` }} />
       <div
