@@ -14,8 +14,8 @@ export default function MastersPage() {
         eyebrow="Команда"
         title="Сначала человек, потом процедура"
         text="У каждого мастера будет своя специализация, принцип работы и живые примеры. Сейчас карточки ждут реальных данных."
-        image="/images/process-care.jpg"
-        imageAlt="[ФОТО МАСТЕРА / ПРОЦЕССА]"
+        image="/images/salon/portrait-brows.jpg"
+        imageAlt="Работа салона"
       />
       <MastersPreview hideIntro />
     </>

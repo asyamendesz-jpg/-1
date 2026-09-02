@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     locale: "ru_RU",
     type: "website",
     siteName: site.name,
-    images: [{ url: "/images/hero-hair.jpg", width: 1200, height: 675, alt: site.name }],
+    images: [{ url: "/images/salon/hair-waves-blonde.jpg", width: 1200, height: 675, alt: site.name }],
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },

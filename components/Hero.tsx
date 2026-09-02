@@ -29,11 +29,12 @@ export function Hero() {
         </div>
         <div className="group relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] shadow-[var(--shadow-soft)] lg:max-w-none">
           <WorkPhoto
-            src="/images/hero-hair.jpg"
-            alt="[ФОТО РАБОТЫ] Крупный эмоциональный кадр реальной работы салона — заменить"
+            src="/images/salon/hair-waves-blonde.jpg"
+            alt="Ухоженные волосы — работа салона «Бережный уход»"
             className="h-full w-full"
             sizes="(max-width: 1024px) 90vw, 42vw"
             priority
+            showBadge={false}
           />
         </div>
       </div>

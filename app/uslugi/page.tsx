@@ -16,8 +16,8 @@ export default function ServicesPage() {
         eyebrow="Услуги"
         title="Не каталог процедур, а путь от желания"
         text="Можно листать направления. Можно сразу ответить на несколько вопросов. Вам не нужно заранее знать, чем кератин отличается от нанопластики."
-        image="/images/process-care.jpg"
-        imageAlt="[ФОТО ПРОЦЕССА] Руки мастера — заменить на кадр работы салона"
+        image="/images/salon/hair-straight-brunette.jpg"
+        imageAlt="Работа салона: гладкие волосы"
       />
       {categories.map((category) => (
         <Section key={category.id} tone={category.id === "extensions" || category.id === "brows" ? "cream" : "ivory"}>

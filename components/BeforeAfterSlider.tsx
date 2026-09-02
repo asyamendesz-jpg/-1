@@ -1,6 +1,5 @@
 "use client";
 
-import { PlaceholderBadge } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -45,7 +44,6 @@ export function BeforeAfterSlider({
       <div className="absolute inset-0 overflow-hidden" style={{ width: `${value}%` }}>
         <Image src={before} alt={beforeAlt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
       </div>
-      <PlaceholderBadge />
       <div className="pointer-events-none absolute inset-y-0 z-10 w-px bg-ivory" style={{ left: `${value}%` }} />
       <div
         className="pointer-events-none absolute top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/70 bg-ivory/85 text-[10px] uppercase tracking-[0.14em] text-chocolate"

@@ -37,7 +37,7 @@ export function PortfolioGallery({
         <Eyebrow>Реальные работы</Eyebrow>
         <h2 className="font-serif text-4xl text-ink md:text-6xl">{heading}</h2>
         <p className="mt-4 max-w-xl text-muted">
-          Здесь будут живые работы салона. Пока стоят понятные placeholders — замените фото в `lib/content.ts`.
+          Работы салона. Для сравнения «до/после» двигайте ползунок.
         </p>
       </Reveal>
       {!filter ? (

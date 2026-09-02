@@ -9,7 +9,7 @@ export function WorkPhoto({
   sizes = "(max-width: 768px) 100vw, 50vw",
   priority = false,
   badge = "[ФОТО РАБОТЫ]",
-  showBadge = true,
+  showBadge = false,
 }: {
   src: string;
   alt: string;

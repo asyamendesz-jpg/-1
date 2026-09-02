@@ -26,11 +26,11 @@ import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
 const modes: { id: DirectionId; label: string; text: string; image: string }[] = [
-  { id: "hair", label: "Волосы", text: "Гладкость, восстановление, уход", image: "/images/cat-hair.jpg" },
-  { id: "extensions", label: "Наращивание волос", text: "Длина и густота", image: "/images/cat-extensions.jpg" },
-  { id: "lashes", label: "Ресницы", text: "Наращивание или ламинирование", image: "/images/cat-lashes.jpg" },
-  { id: "brows", label: "Брови", text: "Форма, цвет, ламинирование", image: "/images/cat-brows.jpg" },
-  { id: "complex", label: "Хочу комплексный образ", text: "Что изменить, а что оставить", image: "/images/cat-complex.jpg" },
+  { id: "hair", label: "Волосы", text: "Гладкость, восстановление, уход", image: "/images/salon/hair-straight-brunette.jpg" },
+  { id: "extensions", label: "Наращивание волос", text: "Длина и густота", image: "/images/salon/extensions-before-after-dark.jpg" },
+  { id: "lashes", label: "Ресницы", text: "Наращивание или ламинирование", image: "/images/salon/lashes-volume-closeup.jpg" },
+  { id: "brows", label: "Брови", text: "Форма, цвет, ламинирование", image: "/images/salon/portrait-brows.jpg" },
+  { id: "complex", label: "Хочу комплексный образ", text: "Что изменить, а что оставить", image: "/images/salon/makeup-glitter-eyes.jpg" },
 ];
 
 const titles: Record<DirectionId, string> = {

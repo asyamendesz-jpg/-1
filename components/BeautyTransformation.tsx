@@ -19,10 +19,9 @@ export function BeautyTransformation() {
         <Reveal>
           <div className="group overflow-hidden rounded-[2rem]">
             <WorkPhoto
-              src="/images/salon-atmosphere.jpg"
-              alt="[ФОТО АТМОСФЕРЫ САЛОНА] Заменить на кадр пространства или работы"
+              src="/images/salon/makeup-glitter-eyes.jpg"
+              alt="Работа салона: гармоничный образ"
               className="aspect-[4/3] w-full"
-              badge="[ФОТО АТМОСФЕРЫ]"
             />
           </div>
         </Reveal>
