@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const repoName = "-1";
+const isGitHubPages = process.env.GITHUB_PAGES === "true";
+const pagesBasePath = isGitHubPages ? `/${repoName}` : "";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -10,7 +12,10 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.GITHUB_PAGES === "true" ? `/${repoName}` : "",
+  basePath: pagesBasePath,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: pagesBasePath,
+  },
 };
 
 export default nextConfig;

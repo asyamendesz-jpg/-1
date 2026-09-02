@@ -1,4 +1,5 @@
 import { PlaceholderBadge } from "@/components/Reveal";
+import { mediaSrc } from "@/lib/asset";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -22,7 +23,7 @@ export function WorkPhoto({
   return (
     <div className={cn("relative overflow-hidden bg-powder", className)}>
       <Image
-        src={src}
+        src={mediaSrc(src)}
         alt={alt}
         fill
         sizes={sizes}

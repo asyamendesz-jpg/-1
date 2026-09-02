@@ -1,5 +1,6 @@
 "use client";
 
+import { mediaSrc } from "@/lib/asset";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -40,9 +41,9 @@ export function BeforeAfterSlider({
         onPointer(event.clientX);
       }}
     >
-      <Image src={after} alt={afterAlt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+      <Image src={mediaSrc(after)} alt={afterAlt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
       <div className="absolute inset-0 overflow-hidden" style={{ width: `${value}%` }}>
-        <Image src={before} alt={beforeAlt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+        <Image src={mediaSrc(before)} alt={beforeAlt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
       </div>
       <div className="pointer-events-none absolute inset-y-0 z-10 w-px bg-ivory" style={{ left: `${value}%` }} />
       <div
