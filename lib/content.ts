@@ -717,9 +717,9 @@ export const portfolio = [
     category: "lashes" as DirectionId,
     title: "Выразительный взгляд",
     caption: "До и после: объёмное наращивание ресниц.",
-    before: "/images/salon/lashes-before-after.jpg",
-    after: "/images/salon/lashes-before-after.jpg",
-    compare: false,
+    before: "/images/salon/lashes-before.jpg",
+    after: "/images/salon/lashes-after.jpg",
+    pair: true,
     isPlaceholder: false,
   },
   {

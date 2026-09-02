@@ -1,4 +1,4 @@
-import { BeforeAfterPhoto, BeforeAfterSlider } from "@/components/BeforeAfterSlider";
+import { BeforeAfterPair, BeforeAfterPhoto, BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { Button } from "@/components/Button";
 import { CrossSell } from "@/components/CrossSell";
 import { getMasterForDirection, getService, portfolio } from "@/lib/content";
@@ -63,7 +63,16 @@ export function QuizResult({ result, name }: { result: QuizResultType; name: str
           <p className="mb-4 font-serif text-2xl text-ink">Похожие работы</p>
           <div className="grid gap-4 md:grid-cols-2">
             {works.map((item) =>
-              item.compare === false ? (
+              item.pair ? (
+                <BeforeAfterPair
+                  key={item.id}
+                  before={item.before}
+                  after={item.after}
+                  beforeAlt={`${item.caption} — до`}
+                  afterAlt={`${item.caption} — после`}
+                  className="rounded-[1.3rem]"
+                />
+              ) : item.compare === false ? (
                 <BeforeAfterPhoto
                   key={item.id}
                   src={item.after}

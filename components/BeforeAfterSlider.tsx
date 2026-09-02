@@ -93,3 +93,34 @@ export function BeforeAfterPhoto({
     </div>
   );
 }
+
+export function BeforeAfterPair({
+  before,
+  after,
+  beforeAlt,
+  afterAlt,
+  className,
+}: {
+  before: string;
+  after: string;
+  beforeAlt: string;
+  afterAlt: string;
+  className?: string;
+}) {
+  return (
+    <div className={cn("grid grid-cols-2 overflow-hidden bg-powder", className)}>
+      <div className="relative aspect-[4/5]">
+        <WorkPhoto src={before} alt={beforeAlt} className="h-full w-full" sizes="(max-width: 768px) 50vw, 25vw" />
+        <div className="pointer-events-none absolute left-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
+          До
+        </div>
+      </div>
+      <div className="relative aspect-[4/5]">
+        <WorkPhoto src={after} alt={afterAlt} className="h-full w-full" sizes="(max-width: 768px) 50vw, 25vw" />
+        <div className="pointer-events-none absolute right-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
+          После
+        </div>
+      </div>
+    </div>
+  );
+}
