@@ -62,8 +62,8 @@ export function QuizResult({ result, name }: { result: QuizResultType; name: str
         <div>
           <p className="mb-4 font-serif text-2xl text-ink">Похожие работы</p>
           <div className="grid gap-4 md:grid-cols-2">
-            {works.map((item) => (
-              {item.compare === false ? (
+            {works.map((item) =>
+              item.compare === false ? (
                 <BeforeAfterPhoto
                   key={item.id}
                   src={item.after}
@@ -79,8 +79,8 @@ export function QuizResult({ result, name }: { result: QuizResultType; name: str
                   afterAlt={item.caption}
                   className="rounded-[1.3rem]"
                 />
-              )}
-            ))}
+              ),
+            )}
           </div>
         </div>
       ) : null}
