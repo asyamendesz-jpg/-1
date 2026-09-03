@@ -76,6 +76,9 @@ export function PortfolioGallery({
                   after={item.after}
                   beforeAlt={`${item.caption} — до`}
                   afterAlt={`${item.caption} — после`}
+                  objectPosition={item.objectPosition}
+                  afterObjectPosition={item.afterObjectPosition}
+                  afterScale={item.afterScale}
                 />
               )}
               <figcaption className="p-5">

@@ -702,6 +702,9 @@ export interface PortfolioItem {
   after: string;
   pair?: boolean;
   compare?: boolean;
+  objectPosition?: string;
+  afterObjectPosition?: string;
+  afterScale?: number;
   isPlaceholder: boolean;
 }
 
@@ -710,27 +713,50 @@ export const portfolio: PortfolioItem[] = [
     id: "p1",
     category: "hair" as DirectionId,
     title: "Гладкость и блеск",
-    caption: "Работа салона: гладкие волосы. При появлении отдельного кадра «до» замените before.",
+    caption: "До и после: выпрямление и уход за волосами.",
     before: "/images/ba-hair-before.jpg",
-    after: "/images/salon/hair-straight-brunette.jpg",
+    after: "/images/ba-hair-after.jpg",
+    afterObjectPosition: "28% 0%",
+    afterScale: 1.28,
     isPlaceholder: false,
   },
   {
     id: "p2",
     category: "extensions" as DirectionId,
     title: "Длина и объём",
-    caption: "Работа салона: наращивание. Сейчас в слайдере общий кадр до/после.",
+    caption: "До и после: наращивание светлых волос.",
     before: "/images/salon/extensions-before-after-blonde.jpg",
+    after: "/images/salon/extensions-before-after-blonde.jpg",
+    compare: false,
+    isPlaceholder: false,
+  },
+  {
+    id: "p8",
+    category: "extensions" as DirectionId,
+    title: "Длина и густота",
+    caption: "До и после: наращивание тёмных волос.",
+    before: "/images/salon/extensions-before-after-dark.jpg",
     after: "/images/salon/extensions-before-after-dark.jpg",
+    compare: false,
     isPlaceholder: false,
   },
   {
     id: "p3",
     category: "lashes" as DirectionId,
     title: "Выразительный взгляд",
-    caption: "До и после: взгляд и оформление бровей.",
-    before: "/images/salon/look-before.jpg",
-    after: "/images/salon/look-after.jpg",
+    caption: "До и после: взгляд до и после оформления.",
+    before: "/images/salon/lashes-work-before.jpg",
+    after: "/images/salon/lashes-work-after.jpg",
+    isPlaceholder: false,
+  },
+  {
+    id: "p6",
+    category: "lashes" as DirectionId,
+    title: "Объём ресниц",
+    caption: "До и после: наращивание ресниц, один взгляд.",
+    before: "/images/salon/lashes-before-after.jpg",
+    after: "/images/salon/lashes-before-after.jpg",
+    compare: false,
     isPlaceholder: false,
   },
   {
@@ -738,26 +764,8 @@ export const portfolio: PortfolioItem[] = [
     category: "brows" as DirectionId,
     title: "Аккуратная форма",
     caption: "До и после: оформление бровей.",
-    before: "/images/salon/brows-before.jpg",
-    after: "/images/salon/brows-after.jpg",
-    isPlaceholder: false,
-  },
-  {
-    id: "p5",
-    category: "hair" as DirectionId,
-    title: "Волна и блеск",
-    caption: "Работа салона: ухоженные волосы в движении.",
-    before: "/images/ba-hair-before.jpg",
-    after: "/images/salon/hair-waves-blonde.jpg",
-    isPlaceholder: false,
-  },
-  {
-    id: "p7",
-    category: "brows" as DirectionId,
-    title: "Взгляд и макияж",
-    caption: "Работа салона: оформление взгляда.",
-    before: "/images/ba-brow-before.jpg",
-    after: "/images/salon/makeup-glitter-eyes.jpg",
+    before: "/images/salon/brows-work-before.jpg",
+    after: "/images/salon/brows-work-after.jpg",
     isPlaceholder: false,
   },
 ];
