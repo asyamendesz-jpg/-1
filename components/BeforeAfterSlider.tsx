@@ -11,14 +11,22 @@ export function BeforeAfterSlider({
   after,
   beforeAlt,
   afterAlt,
+  objectPosition,
+  afterObjectPosition,
+  afterScale,
   className,
 }: {
   before: string;
   after: string;
   beforeAlt: string;
   afterAlt: string;
+  objectPosition?: string;
+  afterObjectPosition?: string;
+  afterScale?: number;
   className?: string;
 }) {
+  const beforePosition = objectPosition ?? "center top";
+  const afterPosition = afterObjectPosition ?? objectPosition ?? "center top";
   const [value, setValue] = useState(52);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -42,9 +50,27 @@ export function BeforeAfterSlider({
         onPointer(event.clientX);
       }}
     >
-      <Image src={mediaSrc(after)} alt={afterAlt} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
+      <Image
+        src={mediaSrc(after)}
+        alt={afterAlt}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, 50vw"
+        style={{
+          objectPosition: afterPosition,
+          transform: afterScale ? `scale(${afterScale})` : undefined,
+          transformOrigin: afterPosition,
+        }}
+      />
       <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - value}% 0 0)` }}>
-        <Image src={mediaSrc(before)} alt={beforeAlt} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
+        <Image
+          src={mediaSrc(before)}
+          alt={beforeAlt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          style={{ objectPosition: beforePosition }}
+        />
       </div>
       <div className="pointer-events-none absolute inset-y-0 z-10 w-px bg-ivory" style={{ left: `${value}%` }} />
       <div

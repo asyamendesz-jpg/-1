@@ -86,6 +86,9 @@ export function QuizResult({ result, name }: { result: QuizResultType; name: str
                   after={item.after}
                   beforeAlt={item.caption}
                   afterAlt={item.caption}
+                  objectPosition={item.objectPosition}
+                  afterObjectPosition={item.afterObjectPosition}
+                  afterScale={item.afterScale}
                   className="rounded-[1.3rem]"
                 />
               ),
