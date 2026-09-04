@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { MobileStickyCTA } from "@/components/MobileStickyCTA";
+import { mediaSrc } from "@/lib/asset";
 import { site } from "@/lib/content";
 import { isPlaceholder } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -39,6 +40,9 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
+  icons: {
+    icon: [{ url: mediaSrc("/icon.png"), type: "image/png", sizes: "32x32" }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
