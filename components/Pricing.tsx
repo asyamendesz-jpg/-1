@@ -1,21 +1,26 @@
+"use client";
+
 import { Button } from "@/components/Button";
 import { Eyebrow, Reveal, Section } from "@/components/Reveal";
-import { categories, site } from "@/lib/content";
+import { useTranslatedCategories } from "@/lib/i18n/resolve";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { isPlaceholder } from "@/lib/utils";
+import { site } from "@/lib/content";
 
 export function Pricing({ compact = false }: { compact?: boolean }) {
+  const { copy } = useLanguage();
+  const categories = useTranslatedCategories();
+
   return (
     <Section id="ceny" tone="ivory">
       <Reveal>
-        <Eyebrow>Стоимость и нюансы</Eyebrow>
-        <h2 className="font-serif text-4xl text-ink md:text-6xl">Цены указаны «от» — и это честно</h2>
-        <p className="mt-5 max-w-2xl text-muted">
-          Итоговая сумма зависит от длины, густоты, исходного состояния, объёма материала и выбранного эффекта. Поэтому мы не ставим одну цифру для всех. Точную стоимость мастер называет после диагностики.
-        </p>
+        <Eyebrow>{copy.pricing.eyebrow}</Eyebrow>
+        <h2 className="font-serif text-4xl text-ink md:text-6xl">{copy.pricing.title}</h2>
+        <p className="mt-5 max-w-2xl text-muted">{copy.pricing.text}</p>
         {!isPlaceholder(site.installment) ? (
           <p className="mt-3 text-sm text-chocolate">{site.installment}</p>
         ) : (
-          <p className="mt-3 text-sm text-mist">{site.installment}</p>
+          <p className="mt-3 text-sm text-mist">{copy.pricing.installment}</p>
         )}
       </Reveal>
       <div className="mt-12 space-y-8">
@@ -34,8 +39,8 @@ export function Pricing({ compact = false }: { compact?: boolean }) {
                     <div>
                       <p className="font-medium text-ink">{service.name}</p>
                       <p className="mt-1 text-sm text-muted">
-                        От чего зависит цена: {service.priceDependsOn.join(", ")}.
-                        {service.consultationRequired ? " Перед процедурой нужна консультация." : ""}
+                        {copy.ui.priceDepends}: {service.priceDependsOn.join(", ")}.
+                        {service.consultationRequired ? ` ${copy.ui.consultationNeeded}.` : ""}
                       </p>
                       {service.extra ? <p className="mt-1 text-xs text-mist">{service.extra}</p> : null}
                     </div>
@@ -51,11 +56,10 @@ export function Pricing({ compact = false }: { compact?: boolean }) {
       {compact ? (
         <div className="mt-6">
           <Button href="/tseny" variant="ghost" className="px-0 hover:bg-transparent">
-            Смотреть все цены →
+            {copy.ui.seeAllPrices}
           </Button>
         </div>
       ) : null}
     </Section>
   );
 }
-

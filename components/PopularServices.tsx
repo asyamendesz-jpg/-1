@@ -1,8 +1,13 @@
+"use client";
+
 import { Button } from "@/components/Button";
 import { Eyebrow, Reveal, Section } from "@/components/Reveal";
-import { categories } from "@/lib/content";
+import { useTranslatedCategories } from "@/lib/i18n/resolve";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function PopularServices() {
+  const { copy } = useLanguage();
+  const categories = useTranslatedCategories();
   const popular = categories.flatMap((category) =>
     category.services.slice(0, 2).map((service) => ({ ...service, category })),
   );
@@ -10,8 +15,8 @@ export function PopularServices() {
   return (
     <Section id="metody" tone="ivory">
       <Reveal>
-        <Eyebrow>Методы</Eyebrow>
-        <h2 className="font-serif text-4xl text-ink md:text-6xl">Популярные запросы — простым языком</h2>
+        <Eyebrow>{copy.methods.eyebrow}</Eyebrow>
+        <h2 className="font-serif text-4xl text-ink md:text-6xl">{copy.methods.title}</h2>
       </Reveal>
       <div className="mt-12 grid gap-4 md:grid-cols-2">
         {popular.map((item, index) => (

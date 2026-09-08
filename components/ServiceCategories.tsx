@@ -1,26 +1,27 @@
+"use client";
+
 import { Button } from "@/components/Button";
 import { Eyebrow, Reveal, Section } from "@/components/Reveal";
 import { WorkPhoto } from "@/components/WorkPhoto";
-import { categories } from "@/lib/content";
+import { useTranslatedCategories } from "@/lib/i18n/resolve";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import Link from "next/link";
 
 export function ServiceCategories() {
+  const { copy } = useLanguage();
+  const categories = useTranslatedCategories();
+
   return (
     <Section id="napravleniya" tone="cream">
       <Reveal>
-        <Eyebrow>Направления</Eyebrow>
-        <h2 className="font-serif text-4xl text-ink md:text-6xl">Четыре бережных фокуса</h2>
+        <Eyebrow>{copy.directions.eyebrow}</Eyebrow>
+        <h2 className="font-serif text-4xl text-ink md:text-6xl">{copy.directions.title}</h2>
       </Reveal>
       <div className="mt-12 grid gap-6 lg:grid-cols-2">
         {categories.map((item, index) => (
           <Reveal key={item.id} delay={index * 0.05}>
             <article className="group grid overflow-hidden rounded-[1.8rem] bg-ivory shadow-[var(--shadow-card)] md:grid-cols-[0.9fr_1.1fr]">
-              <WorkPhoto
-                src={item.image}
-                alt={item.imageAlt}
-                className="aspect-[4/5] min-h-full w-full md:aspect-auto"
-                sizes="(max-width: 768px) 100vw, 40vw"
-              />
+              <WorkPhoto src={item.image} alt={item.imageAlt} className="aspect-[4/5] min-h-full w-full md:aspect-auto" sizes="(max-width: 768px) 100vw, 40vw" />
               <div className="flex flex-col justify-between p-6 md:p-8">
                 <div>
                   <p className="text-[11px] uppercase tracking-[0.22em] text-gold-deep">0{index + 1}</p>
@@ -35,7 +36,7 @@ export function ServiceCategories() {
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Button href={item.quizHref}>{item.cta}</Button>
                   <Link href={item.href} className="self-center text-sm text-muted hover:text-ink">
-                    Смотреть направление
+                    {copy.ui.lookDirection}
                   </Link>
                 </div>
               </div>

@@ -2,21 +2,14 @@
 
 import { BeforeAfterPair, BeforeAfterPhoto, BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { Eyebrow, Reveal, Section } from "@/components/Reveal";
-import { portfolio } from "@/lib/content";
 import type { DirectionId } from "@/lib/content";
+import { translatedPortfolio } from "@/lib/i18n/resolve";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 
-const filters: { id: "all" | DirectionId; label: string }[] = [
-  { id: "all", label: "Все" },
-  { id: "hair", label: "Волосы" },
-  { id: "extensions", label: "Наращивание" },
-  { id: "lashes", label: "Ресницы" },
-  { id: "brows", label: "Брови" },
-];
-
 export function PortfolioGallery({
-  heading = "До и после",
+  heading,
   limit,
   filter,
 }: {
@@ -24,24 +17,31 @@ export function PortfolioGallery({
   limit?: number;
   filter?: DirectionId;
 }) {
+  const { copy } = useLanguage();
   const [active, setActive] = useState<"all" | DirectionId>(filter ?? "all");
+  const filters: { id: "all" | DirectionId; label: string }[] = [
+    { id: "all", label: copy.ui.all },
+    { id: "hair", label: copy.ui.directionHair },
+    { id: "extensions", label: copy.ui.directionExtensions },
+    { id: "lashes", label: copy.ui.directionLashes },
+    { id: "brows", label: copy.ui.directionBrows },
+  ];
+  const portfolio = translatedPortfolio(copy);
 
   const items = useMemo(() => {
     const list = portfolio.filter((item) => (active === "all" ? true : item.category === active));
     return typeof limit === "number" ? list.slice(0, limit) : list;
-  }, [active, limit]);
+  }, [active, limit, portfolio]);
 
   return (
     <Section id="raboty" tone="cream">
       <Reveal>
-        <Eyebrow>Реальные работы</Eyebrow>
-        <h2 className="font-serif text-4xl text-ink md:text-6xl">{heading}</h2>
-        <p className="mt-4 max-w-xl text-muted">
-          Работы салона. Для сравнения «до/после» двигайте ползунок.
-        </p>
+        <Eyebrow>{copy.portfolio.eyebrow}</Eyebrow>
+        <h2 className="font-serif text-4xl text-ink md:text-6xl">{heading ?? copy.portfolio.heading}</h2>
+        <p className="mt-4 max-w-xl text-muted">{copy.portfolio.text}</p>
       </Reveal>
       {!filter ? (
-        <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Фильтр работ">
+        <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label={copy.portfolio.filterAria}>
           {filters.map((item) => (
             <button
               key={item.id}
@@ -65,8 +65,8 @@ export function PortfolioGallery({
                 <BeforeAfterPair
                   before={item.before}
                   after={item.after}
-                  beforeAlt={`${item.caption} — до`}
-                  afterAlt={`${item.caption} — после`}
+                  beforeAlt={`${item.caption} — ${copy.ui.before}`}
+                  afterAlt={`${item.caption} — ${copy.ui.after}`}
                 />
               ) : item.compare === false ? (
                 <BeforeAfterPhoto src={item.after} alt={item.caption} />
@@ -74,8 +74,8 @@ export function PortfolioGallery({
                 <BeforeAfterSlider
                   before={item.before}
                   after={item.after}
-                  beforeAlt={`${item.caption} — до`}
-                  afterAlt={`${item.caption} — после`}
+                  beforeAlt={`${item.caption} — ${copy.ui.before}`}
+                  afterAlt={`${item.caption} — ${copy.ui.after}`}
                   objectPosition={item.objectPosition}
                   afterObjectPosition={item.afterObjectPosition}
                   afterScale={item.afterScale}

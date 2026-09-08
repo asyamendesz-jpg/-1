@@ -1,7 +1,8 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import { nav, site } from "@/lib/content";
+import { LanguageSwitch } from "@/components/LanguageSwitch";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -9,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function Header() {
+  const { copy } = useLanguage();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -40,15 +42,15 @@ export function Header() {
           : "border-transparent bg-ivory/70 backdrop-blur-sm",
       )}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-8 lg:px-12">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3 sm:gap-4 sm:px-8 lg:px-12">
         <Link href="/" className="min-w-0">
           <span className="font-serif text-[22px] leading-none tracking-tight text-ink sm:text-[26px]">
-            {site.name}
+            {copy.brand}
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex" aria-label="Основное меню">
-          {nav.map((item) => (
+        <nav className="hidden items-center gap-6 lg:flex" aria-label={copy.navAria}>
+          {copy.nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -62,15 +64,16 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
+          <LanguageSwitch />
           <Button href="/zapis" className="hidden sm:inline-flex px-5 py-2.5" variant="primary">
-            Записаться
+            {copy.book}
           </Button>
           <button
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-graphite lg:hidden"
             aria-expanded={open}
-            aria-label={open ? "Закрыть меню" : "Открыть меню"}
+            aria-label={open ? copy.closeMenu : copy.openMenu}
             onClick={() => setOpen((value) => !value)}
           >
             {open ? <X size={18} /> : <Menu size={18} />}
@@ -80,8 +83,8 @@ export function Header() {
 
       {open ? (
         <div className="border-t border-line bg-ivory lg:hidden">
-          <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4" aria-label="Мобильное меню">
-            {nav.map((item) => (
+          <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4" aria-label={copy.mobileNavAria}>
+            {copy.nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -90,8 +93,11 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <div className="px-3 py-2">
+              <LanguageSwitch />
+            </div>
             <Button href="/zapis" full className="mt-3">
-              Записаться
+              {copy.book}
             </Button>
           </nav>
         </div>

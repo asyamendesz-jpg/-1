@@ -3,6 +3,8 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { MobileStickyCTA } from "@/components/MobileStickyCTA";
+import { SkipToContent } from "@/components/SkipToContent";
+import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 import { mediaSrc } from "@/lib/asset";
 import { site } from "@/lib/content";
 import { isPlaceholder } from "@/lib/utils";
@@ -10,7 +12,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
-  subsets: ["latin", "cyrillic"],
+  // Google Fonts includes Greek; next/font types currently omit it.
+  subsets: ["latin", "cyrillic", "greek"] as Array<"latin" | "cyrillic">,
   weight: ["400", "500", "600", "700"],
   variable: "--font-cormorant",
   display: "swap",
@@ -47,19 +50,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={`${cormorant.variable} ${manrope.variable}`}>
+    <html lang="ru" className={`${cormorant.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body className="bg-ivory text-graphite antialiased">
-        <JsonLd />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[80] focus:bg-ivory focus:px-4 focus:py-2"
-        >
-          Перейти к содержанию
-        </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <MobileStickyCTA />
+        <LanguageProvider>
+          <JsonLd />
+          <SkipToContent />
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+          <MobileStickyCTA />
+        </LanguageProvider>
       </body>
     </html>
   );

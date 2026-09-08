@@ -1,19 +1,27 @@
+"use client";
+
 import { BeautyQuiz } from "@/components/BeautyQuiz";
 import { Button } from "@/components/Button";
 import { CrossSell } from "@/components/CrossSell";
 import { PageHero } from "@/components/PageHero";
 import { PortfolioGallery } from "@/components/PortfolioGallery";
 import { Section } from "@/components/Reveal";
-import { buildMetadata, type ServiceCategory } from "@/lib/content";
+import type { DirectionId } from "@/lib/content";
+import { useTranslatedCategory } from "@/lib/i18n/resolve";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Suspense } from "react";
 
 export function ServiceDirectionPage({
-  category,
+  categoryId,
   quizMode,
 }: {
-  category: ServiceCategory;
+  categoryId: DirectionId;
   quizMode: "hair" | "extensions" | "lashes" | "brows";
 }) {
+  const { copy } = useLanguage();
+  const category = useTranslatedCategory(categoryId);
+  if (!category) return null;
+
   return (
     <>
       <PageHero
@@ -25,7 +33,7 @@ export function ServiceDirectionPage({
       />
       <Section tone="ivory">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="font-serif text-4xl text-ink">Как отличаются методы</h2>
+          <h2 className="font-serif text-4xl text-ink">{copy.direction.methodsTitle}</h2>
           <Button href={category.quizHref}>{category.cta}</Button>
         </div>
         <div className="space-y-8">
@@ -37,13 +45,15 @@ export function ServiceDirectionPage({
               <div className="mt-5 flex flex-wrap gap-6 text-xs uppercase tracking-[0.16em] text-gold-deep">
                 <span>{service.priceFrom}</span>
                 <span>{service.duration}</span>
-                {service.consultationRequired ? <span>Нужна консультация</span> : null}
+                {service.consultationRequired ? <span>{copy.ui.consultationNeeded}</span> : null}
               </div>
-              <p className="mt-3 text-sm text-mist">От чего зависит цена: {service.priceDependsOn.join(", ")}.</p>
+              <p className="mt-3 text-sm text-mist">
+                {copy.ui.priceDepends}: {service.priceDependsOn.join(", ")}.
+              </p>
               {service.extra ? <p className="mt-2 text-sm text-mist">{service.extra}</p> : null}
               <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.7fr]">
                 <Button href={`/zapis?service=${service.id}`} variant="secondary" className="w-fit">
-                  Записаться на консультацию
+                  {copy.ui.bookConsultation}
                 </Button>
                 <CrossSell item={service.crossSell} />
               </div>
@@ -52,18 +62,14 @@ export function ServiceDirectionPage({
         </div>
       </Section>
       <Section tone="cream">
-        <h2 className="mb-8 font-serif text-4xl text-ink">{category.id === "extensions" ? "Калькулятор наращивания" : category.id === "lashes" ? "Какой эффект ресниц — ваш?" : category.id === "brows" ? "Подбор формы бровей" : "Что подойдёт именно моим волосам?"}</h2>
+        <h2 className="mb-8 font-serif text-4xl text-ink">{copy.direction.quizTitles[category.id]}</h2>
         <div className="rounded-[2rem] bg-ivory p-5 sm:p-8">
-          <Suspense fallback={<p className="text-muted">Открываем подбор…</p>}>
+          <Suspense fallback={<p className="text-muted">{copy.ui.loadingQuiz}</p>}>
             <BeautyQuiz initialMode={quizMode} />
           </Suspense>
         </div>
       </Section>
-      <PortfolioGallery heading="Работы этого направления" filter={category.id} />
+      <PortfolioGallery heading={copy.portfolio.headingDirection} filter={category.id} />
     </>
   );
-}
-
-export function directionMetadata(category: ServiceCategory) {
-  return buildMetadata(category.title, category.description);
 }

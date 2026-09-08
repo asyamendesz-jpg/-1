@@ -2,7 +2,9 @@
 
 import { Button } from "@/components/Button";
 import { OptionGrid, QuizStep } from "@/components/QuizStep";
-import { categories, masters, site } from "@/lib/content";
+import { masters, site } from "@/lib/content";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { translatedMaster, useTranslatedCategories } from "@/lib/i18n/resolve";
 import { hasUsableLink } from "@/lib/utils";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -25,12 +27,15 @@ export function BookingWizard({
   initialService?: string;
   initialMaster?: string;
 }) {
+  const { copy } = useLanguage();
   const searchParams = useSearchParams();
+  const categories = useTranslatedCategories();
   const services = useMemo(
     () => categories.flatMap((category) => category.services.map((service) => ({ ...service, category: category.title }))),
-    [],
+    [categories],
   );
   const dates = useMemo(() => upcomingDates(), []);
+  const localizedMasters = masters.map((item) => translatedMaster(copy, item.id) ?? item);
 
   const [step, setStep] = useState(0);
   const [serviceId, setServiceId] = useState(initialService ?? searchParams.get("service") ?? "");
@@ -44,7 +49,7 @@ export function BookingWizard({
   const [error, setError] = useState("");
 
   const service = services.find((item) => item.id === serviceId);
-  const master = masters.find((item) => item.id === masterId);
+  const master = localizedMasters.find((item) => item.id === masterId);
 
   const next = () => setStep((value) => value + 1);
   const back = () => setStep((value) => Math.max(0, value - 1));
@@ -52,7 +57,7 @@ export function BookingWizard({
   const submit = async () => {
     setError("");
     if (!name.trim() || !contact.trim() || !consent) {
-      setError("Заполните контакт и согласие на обработку данных.");
+      setError(copy.wizard.error);
       return;
     }
     await fetch("/api/leads", {
@@ -74,7 +79,7 @@ export function BookingWizard({
   if (hasUsableLink(site.booking.embedUrl)) {
     return (
       <iframe
-        title="Онлайн-запись"
+        title={copy.wizard.iframeTitle}
         src={site.booking.embedUrl}
         className="min-h-[720px] w-full rounded-[1.6rem] border-0"
       />
@@ -82,20 +87,23 @@ export function BookingWizard({
   }
 
   if (done) {
+    const masterPart = master ? copy.wizard.masterLabel.replace("{name}", master.name) : "";
     return (
       <div className="rounded-[1.6rem] bg-cream p-8">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-gold-deep">Заявка принята</p>
-        <h2 className="mt-4 font-serif text-4xl text-ink">Мы получили ваш запрос на запись</h2>
+        <p className="text-[11px] uppercase tracking-[0.22em] text-gold-deep">{copy.wizard.acceptedEyebrow}</p>
+        <h2 className="mt-4 font-serif text-4xl text-ink">{copy.wizard.acceptedTitle}</h2>
         <p className="mt-4 max-w-xl text-muted">
-          {name}, вы выбрали {service?.name ?? "консультацию"}
-          {master ? `, мастер: ${master.name}` : ""}. Предпочтительное время: {date} {time}.
+          {copy.wizard.acceptedText
+            .replace("{name}", name)
+            .replace("{service}", service?.name ?? copy.wizard.consultationFallback)
+            .replace("{master}", masterPart)
+            .replace("{date}", date)
+            .replace("{time}", time)}
         </p>
-        <p className="mt-4 text-sm text-mist">
-          Пока онлайн-запись не подключена, заявка уходит в заготовленный приём (`site.leads.webhookUrl` / `site.booking.url`). Подтверждение времени сделает администратор или сервис записи.
-        </p>
+        <p className="mt-4 text-sm text-mist">{copy.wizard.acceptedNote}</p>
         {hasUsableLink(site.booking.url) ? (
           <Button href={site.booking.url} className="mt-6">
-            Открыть сервис записи
+            {copy.wizard.openBooking}
           </Button>
         ) : null}
       </div>
@@ -104,7 +112,7 @@ export function BookingWizard({
 
   const questions = [
     {
-      title: "Услуга",
+      title: copy.wizard.serviceStep,
       node: (
         <OptionGrid
           options={services.map((item) => ({ value: item.id, label: `${item.name} · ${item.category}` }))}
@@ -115,10 +123,10 @@ export function BookingWizard({
       can: Boolean(serviceId),
     },
     {
-      title: "Мастер",
+      title: copy.wizard.masterStep,
       node: (
         <OptionGrid
-          options={masters.map((item) => ({ value: item.id, label: `${item.name} · ${item.specialization}` }))}
+          options={localizedMasters.map((item) => ({ value: item.id, label: `${item.name} · ${item.specialization}` }))}
           value={masterId}
           onChange={setMasterId}
         />
@@ -126,7 +134,7 @@ export function BookingWizard({
       can: Boolean(masterId),
     },
     {
-      title: "Дата",
+      title: copy.wizard.dateStep,
       node: (
         <OptionGrid
           options={dates.map((item) => ({ value: item, label: item }))}
@@ -137,7 +145,7 @@ export function BookingWizard({
       can: Boolean(date),
     },
     {
-      title: "Время",
+      title: copy.wizard.timeStep,
       node: (
         <OptionGrid
           options={times.map((item) => ({ value: item, label: item }))}
@@ -148,11 +156,11 @@ export function BookingWizard({
       can: Boolean(time),
     },
     {
-      title: "Контакт",
+      title: copy.wizard.contactStep,
       node: (
         <div className="grid gap-4">
           <label className="text-sm">
-            <span className="mb-2 block text-mist">Имя</span>
+            <span className="mb-2 block text-mist">{copy.quiz.name}</span>
             <input
               className="w-full rounded-2xl border border-line bg-ivory px-4 py-3 outline-none focus:border-gold"
               value={name}
@@ -161,7 +169,7 @@ export function BookingWizard({
             />
           </label>
           <label className="text-sm">
-            <span className="mb-2 block text-mist">Телефон или мессенджер</span>
+            <span className="mb-2 block text-mist">{copy.quiz.phone}</span>
             <input
               className="w-full rounded-2xl border border-line bg-ivory px-4 py-3 outline-none focus:border-gold"
               value={contact}
@@ -172,9 +180,9 @@ export function BookingWizard({
           <label className="flex items-start gap-3 text-sm text-muted">
             <input type="checkbox" className="mt-1" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
             <span>
-              Соглашаюсь на обработку персональных данных согласно{" "}
+              {copy.quiz.consent}{" "}
               <Link href="/politika-konfidencialnosti" className="underline decoration-gold/50">
-                политике конфиденциальности
+                {copy.ui.privacyLink}
               </Link>
               .
             </span>
@@ -190,37 +198,35 @@ export function BookingWizard({
 
   return (
     <QuizStep
-      title="Онлайн-запись"
-      question={["Какая услуга нужна?", "К кому хотите записаться?", "Какой день удобен?", "Какое время ближе?", "Как с вами связаться?"][step]}
+      title={copy.wizard.iframeTitle}
+      question={copy.wizard.questions[step]}
       step={step + 1}
       total={questions.length}
     >
       {hasUsableLink(site.booking.url) ? (
         <p className="mb-6 text-sm text-muted">
-          Можно перейти в готовый сервис записи:{" "}
+          {copy.wizard.canOpenService}{" "}
           <a className="underline" href={site.booking.url}>
-            открыть онлайн-запись
+            {copy.wizard.openOnline}
           </a>
           .
         </p>
       ) : (
-        <p className="mb-6 text-sm text-mist">
-          Сейчас это интерфейс-заготовка. Когда появится YCLIENTS, DIKIDI или другая ссылка, вставьте её в `site.booking`.
-        </p>
+        <p className="mb-6 text-sm text-mist">{copy.wizard.placeholderNote}</p>
       )}
       {current.node}
       <div className="mt-8 flex gap-3">
         {step > 0 ? (
           <Button variant="secondary" onClick={back}>
-            Назад
+            {copy.ui.back}
           </Button>
         ) : null}
         {step < questions.length - 1 ? (
           <Button onClick={next} disabled={!current.can}>
-            Дальше
+            {copy.ui.next}
           </Button>
         ) : (
-          <Button onClick={submit}>Подтвердить запрос</Button>
+          <Button onClick={submit}>{copy.wizard.confirm}</Button>
         )}
       </div>
     </QuizStep>

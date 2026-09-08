@@ -1,5 +1,5 @@
 import { Contacts } from "@/components/Contacts";
-import { PageHero } from "@/components/PageHero";
+import { ContactsPageHero } from "@/components/LocalizedPages";
 import { buildMetadata } from "@/lib/content";
 
 export const metadata = buildMetadata(
@@ -10,11 +10,7 @@ export const metadata = buildMetadata(
 export default function ContactsPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Контакты"
-        title="Напишите, позвоните или приезжайте"
-        text="Все поля ниже — редактируемые placeholders, пока салон не укажет реальные данные."
-      />
+      <ContactsPageHero />
       <Contacts />
     </>
   );

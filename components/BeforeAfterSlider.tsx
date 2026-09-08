@@ -3,6 +3,7 @@
 import { WorkPhoto } from "@/components/WorkPhoto";
 import { mediaSrc } from "@/lib/asset";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
@@ -25,6 +26,7 @@ export function BeforeAfterSlider({
   afterScale?: number;
   className?: string;
 }) {
+  const { copy } = useLanguage();
   const beforePosition = objectPosition ?? "center top";
   const afterPosition = afterObjectPosition ?? objectPosition ?? "center top";
   const [value, setValue] = useState(52);
@@ -80,13 +82,13 @@ export function BeforeAfterSlider({
         ↔
       </div>
       <div className="pointer-events-none absolute left-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
-        До
+        {copy.ui.before}
       </div>
       <div className="pointer-events-none absolute right-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
-        После
+        {copy.ui.after}
       </div>
       <input
-        aria-label="Сравнить до и после"
+        aria-label={copy.ui.compareAria}
         type="range"
         min={4}
         max={96}
@@ -107,14 +109,15 @@ export function BeforeAfterPhoto({
   alt: string;
   className?: string;
 }) {
+  const { copy } = useLanguage();
   return (
     <div className={cn("relative aspect-[16/10] overflow-hidden bg-powder", className)}>
       <WorkPhoto src={src} alt={alt} className="h-full w-full" sizes="(max-width: 768px) 100vw, 50vw" />
       <div className="pointer-events-none absolute left-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
-        До
+        {copy.ui.before}
       </div>
       <div className="pointer-events-none absolute right-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
-        После
+        {copy.ui.after}
       </div>
     </div>
   );
@@ -133,18 +136,19 @@ export function BeforeAfterPair({
   afterAlt: string;
   className?: string;
 }) {
+  const { copy } = useLanguage();
   return (
     <div className={cn("grid grid-cols-2 overflow-hidden bg-powder", className)}>
       <div className="relative aspect-[4/5]">
         <WorkPhoto src={before} alt={beforeAlt} className="h-full w-full" sizes="(max-width: 768px) 50vw, 25vw" />
         <div className="pointer-events-none absolute left-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
-          До
+          {copy.ui.before}
         </div>
       </div>
       <div className="relative aspect-[4/5]">
         <WorkPhoto src={after} alt={afterAlt} className="h-full w-full" sizes="(max-width: 768px) 50vw, 25vw" />
         <div className="pointer-events-none absolute right-3 top-3 rounded-full bg-ink/45 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-ivory">
-          После
+          {copy.ui.after}
         </div>
       </div>
     </div>

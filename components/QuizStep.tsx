@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/Button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function QuizStep({
   title,
@@ -16,6 +17,7 @@ export function QuizStep({
   total: number;
   children: React.ReactNode;
 }) {
+  const { copy } = useLanguage();
   const progress = (step / total) * 100;
 
   return (
@@ -25,7 +27,7 @@ export function QuizStep({
         <div className="h-px bg-gold transition-all duration-500" style={{ width: `${progress}%` }} />
       </div>
       <p className="mt-3 text-xs text-mist">
-        Шаг {step} из {total}
+        {copy.ui.stepOf.replace("{step}", String(step)).replace("{total}", String(total))}
       </p>
       <h2 className="mt-6 font-serif text-3xl text-ink md:text-4xl">{question}</h2>
       <div className="mt-8">{children}</div>

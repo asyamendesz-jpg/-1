@@ -64,7 +64,7 @@ export function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function PlaceholderBadge({ label = "[ФОТО РАБОТЫ]" }: { label?: string }) {
+export function PlaceholderBadge({ label = "" }: { label?: string }) {
   return (
     <span className="pointer-events-none absolute bottom-3 left-3 z-10 rounded-full bg-ivory/86 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-chocolate backdrop-blur-sm">
       {label}

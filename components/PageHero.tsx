@@ -1,4 +1,7 @@
+"use client";
+
 import { WorkPhoto } from "@/components/WorkPhoto";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function PageHero({
   eyebrow,
@@ -13,6 +16,8 @@ export function PageHero({
   image?: string;
   imageAlt?: string;
 }) {
+  const { copy } = useLanguage();
+
   return (
     <section className="bg-cream">
       <div className="mx-auto grid max-w-6xl items-end gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-12 lg:py-20">
@@ -23,7 +28,7 @@ export function PageHero({
         </div>
         {image ? (
           <div className="group overflow-hidden rounded-[1.8rem]">
-            <WorkPhoto src={image} alt={imageAlt ?? "[ФОТО РАБОТЫ]"} className="aspect-[4/3] w-full" />
+            <WorkPhoto src={image} alt={imageAlt ?? copy.ui.photoPlaceholder} className="aspect-[4/3] w-full" />
           </div>
         ) : null}
       </div>

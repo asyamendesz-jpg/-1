@@ -1,5 +1,5 @@
-import { PageHero } from "@/components/PageHero";
 import { Pricing } from "@/components/Pricing";
+import { PricesPageHero } from "@/components/LocalizedPages";
 import { buildMetadata } from "@/lib/content";
 
 export const metadata = buildMetadata(
@@ -10,11 +10,7 @@ export const metadata = buildMetadata(
 export default function PricesPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Стоимость"
-        title="Прозрачные условия без одной цифры «для всех»"
-        text="Цена зависит от исходных данных. Мы показываем старт и объясняем нюансы, а точную сумму мастер называет после диагностики."
-      />
+      <PricesPageHero />
       <Pricing />
     </>
   );

@@ -1,19 +1,22 @@
 "use client";
 
-import { faq } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Eyebrow, Reveal, Section } from "@/components/Reveal";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-export function FAQ({ items = faq, title = "Вопросы, которые обычно задают до записи" }: { items?: typeof faq; title?: string }) {
+export function FAQ({ title }: { title?: string }) {
+  const { copy } = useLanguage();
   const [open, setOpen] = useState<number | null>(0);
+  const items = copy.faq.items;
+  const heading = title ?? copy.faq.title;
 
   return (
     <Section id="faq" tone="cream">
       <Reveal>
-        <Eyebrow>FAQ</Eyebrow>
-        <h2 className="max-w-3xl font-serif text-4xl text-ink md:text-6xl">{title}</h2>
+        <Eyebrow>{copy.faq.eyebrow}</Eyebrow>
+        <h2 className="max-w-3xl font-serif text-4xl text-ink md:text-6xl">{heading}</h2>
       </Reveal>
       <div className="mt-10 divide-y divide-line rounded-[1.6rem] border border-line bg-ivory">
         {items.map((item, index) => {
