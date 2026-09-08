@@ -4,6 +4,7 @@ import { Button } from "@/components/Button";
 import { OptionGrid, QuizStep } from "@/components/QuizStep";
 import { categories, masters, site } from "@/lib/content";
 import { hasUsableLink } from "@/lib/utils";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
@@ -172,9 +173,9 @@ export function BookingWizard({
             <input type="checkbox" className="mt-1" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
             <span>
               Соглашаюсь на обработку персональных данных согласно{" "}
-              <a href="/politika-konfidencialnosti" className="underline decoration-gold/50">
+              <Link href="/politika-konfidencialnosti" className="underline decoration-gold/50">
                 политике конфиденциальности
-              </a>
+              </Link>
               .
             </span>
           </label>

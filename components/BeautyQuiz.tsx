@@ -22,6 +22,7 @@ import {
   type QuizResult as QuizResultType,
 } from "@/lib/quiz";
 import type { DirectionId, QuizMode } from "@/lib/content";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
@@ -273,9 +274,9 @@ export function BeautyQuiz({ initialMode }: { initialMode?: QuizMode }) {
             />
             <span>
               Соглашаюсь на обработку персональных данных и принимаю{" "}
-              <a className="underline decoration-gold/50" href="/politika-konfidencialnosti">
+              <Link className="underline decoration-gold/50" href="/politika-konfidencialnosti">
                 политику конфиденциальности
-              </a>
+              </Link>
               .
             </span>
           </label>

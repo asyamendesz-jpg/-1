@@ -7,7 +7,7 @@ export function JsonLd() {
     "@type": "BeautySalon",
     name: site.name,
     description: site.description,
-    image: "/images/salon/hair-waves-blonde.jpg",
+    image: `${site.url}/images/salon/hair-waves-blonde.jpg`,
     address: isPlaceholder(site.contacts.address)
       ? undefined
       : {
