@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/content";
 
 export const metadata = buildMetadata(
   "Мастера",
-  "Мастера салона «Бережный уход». Карточки пока заполнены placeholders — без выдуманных имён, опыта и цитат.",
+  "Мастера салона «Бережное преображение». Карточки пока заполнены placeholders — без выдуманных имён, опыта и цитат.",
 );
 
 export default function MastersPage() {

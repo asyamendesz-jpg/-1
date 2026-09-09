@@ -5,7 +5,7 @@ import { Suspense } from "react";
 
 export const metadata = buildMetadata(
   "Записаться",
-  "Запись в салон «Бережный уход»: услуга, мастер, дата и время. Готовый путь для подключения YCLIENTS или DIKIDI.",
+  "Запись в салон «Бережное преображение»: услуга, мастер, дата и время. Готовый путь для подключения YCLIENTS или DIKIDI.",
 );
 
 export default function ZapisPage() {

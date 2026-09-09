@@ -2,7 +2,7 @@ import type { SiteCopy } from "@/lib/i18n/types";
 
 export const en: SiteCopy = {
   skipToContent: "Skip to content",
-  brand: "Бережный уход",
+  brand: "Бережное преображение",
   navAria: "Main menu",
   mobileNavAria: "Mobile menu",
   openMenu: "Open menu",
@@ -19,7 +19,7 @@ export const en: SiteCopy = {
   ],
   hero: {
     eyebrow: "A salon of gentle care",
-    title: "Бережный уход",
+    title: "Бережное преображение",
     tagline: "Beauty that remains yours.",
     description:
       "Hair straightening and extensions, lashes and brows — matched to you personally, with care for the beauty you already have.",
@@ -29,7 +29,7 @@ export const en: SiteCopy = {
     unsureText:
       "Answer a few questions — we will suggest an option based on the result you want and where you are starting from.",
     pickProcedureArrow: "Find a procedure →",
-    photoAlt: "Healthy hair — work by the “Бережный уход” salon",
+    photoAlt: "Healthy hair — work by the “Бережное преображение” salon",
   },
   ui: {
     pickProcedure: "Find a procedure",
@@ -129,7 +129,7 @@ export const en: SiteCopy = {
     },
   },
   transformation: {
-    eyebrow: "A gentle transformation",
+    eyebrow: "Beauty before and after",
     title: "A personal mix of procedures for hair + lashes + brows.",
     text: "This is not a discount bundle and not “everything at once”. It is a calm combination when you want a harmonious look — not a pile of unrelated treatments.",
     cta: "Build my look",
