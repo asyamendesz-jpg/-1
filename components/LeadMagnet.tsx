@@ -24,9 +24,9 @@ export function LeadMagnet() {
         <Reveal delay={0.08}>
           <div className="group overflow-hidden rounded-[2rem] shadow-[var(--shadow-soft)]">
             <WorkPhoto
-              src="/images/salon/makeup-glitter-eyes.jpg"
+              src="/images/hero-fashion-brunette.jpg"
               alt={block.photoAlt}
-              className="aspect-[4/5] w-full md:aspect-[4/3]"
+              className="aspect-[4/5] w-full md:aspect-[4/3] [&_img]:object-[50%_22%]"
             />
           </div>
         </Reveal>

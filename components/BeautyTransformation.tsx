@@ -22,7 +22,11 @@ export function BeautyTransformation() {
         </Reveal>
         <Reveal>
           <div className="group overflow-hidden rounded-[2rem]">
-            <WorkPhoto src="/images/salon/makeup-glitter-eyes.jpg" alt={block.photoAlt} className="aspect-[4/3] w-full" />
+            <WorkPhoto
+              src="/images/hero-fashion-brunette.jpg"
+              alt={block.photoAlt}
+              className="aspect-[4/3] w-full [&_img]:object-[50%_22%]"
+            />
           </div>
         </Reveal>
       </div>
