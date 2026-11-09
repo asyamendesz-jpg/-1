@@ -281,6 +281,17 @@ export const en: SiteCopy = {
     contacts: "Contacts",
     connect: "Get in touch",
     privacy: "Privacy policy",
+    offer: "Public Offer",
+  },
+  legalPages: {
+    privacy: {
+      title: "Privacy Policy",
+      placeholder: "The legal text will be added after approval.",
+    },
+    offer: {
+      title: "Public Offer",
+      placeholder: "The legal text will be added after approval.",
+    },
   },
   sticky: {
     pick: "Find a procedure",

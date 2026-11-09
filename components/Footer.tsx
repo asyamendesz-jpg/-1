@@ -55,6 +55,11 @@ export function Footer() {
                 {copy.footer.privacy}
               </Link>
             </li>
+            <li>
+              <Link href="/oferta" className="hover:text-ink">
+                {copy.footer.offer}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

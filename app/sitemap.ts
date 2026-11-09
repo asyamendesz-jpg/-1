@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/podbor",
     "/zapis",
     "/politika-konfidencialnosti",
+    "/oferta",
   ];
 
   return paths.map((path) => ({

@@ -220,6 +220,11 @@ export type SiteCopy = {
     contacts: string;
     connect: string;
     privacy: string;
+    offer: string;
+  };
+  legalPages: {
+    privacy: { title: string; placeholder: string };
+    offer: { title: string; placeholder: string };
   };
   sticky: {
     pick: string;
